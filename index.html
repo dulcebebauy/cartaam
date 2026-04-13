@@ -1,156 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú Fácil</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Menú Cafetería</title>
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background:#ffffff;
-  color:#333;
-  font-size:20px;
-  margin:0;
-}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-/* HEADER */
-.header{
-  position: sticky;
-  top:0;
-  background:#7FAFA8;
-  text-align:center;
-  padding:15px;
-}
+  <style>
+    :root { --primary:#7FAFA8; --bg:#f7f7f7; --card:#fff; --accent:#F4BFA6; --text:#5A5A5A; }
+    *{box-sizing:border-box;margin:0;padding:0}
 
-.header img{
-  width:80px;
-}
+    body{
+      font-family:Poppins,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      font-size:20px;
+    }
 
-/* CONTENEDOR */
-.container{
-  padding:15px;
-}
+    /* HEADER */
+    .header{
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #7FAFA8, #6fa39c);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:10px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.15);
+    }
 
-/* FILTROS GRANDES */
-.filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  justify-content:center;
-  margin-bottom:20px;
-}
+    .logo{
+      width:90px;
+      height:90px;
+    }
 
-.filters button{
-  font-size:18px;
-  padding:14px 18px;
-  border:none;
-  border-radius:25px;
-  background:#ddd;
-  cursor:pointer;
-}
+    .container{max-width:1100px;margin:auto;padding:25px}
 
-.filters button.active{
-  background:#7FAFA8;
-  color:white;
-}
+    /* FILTROS */
+    .filters{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin-bottom:25px;
+      flex-wrap:wrap;
+    }
 
-/* PRODUCTOS */
-.card{
-  border-bottom:2px solid #eee;
-  padding:20px 10px;
-  text-align:center;
-}
+    .filters button{
+      padding:16px 22px;
+      border:none;
+      border-radius:25px;
+      background:#ccc;
+      cursor:pointer;
+      font-size:18px;
+    }
 
-.card img{
-  width:100%;
-  max-width:280px;
-  height:auto;
-  border-radius:10px;
-}
+    .filters button.active{
+      background:var(--primary);
+      color:white;
+    }
 
-.card h3{
-  font-size:22px;
-  margin:10px 0;
-}
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+    }
 
-.desc{
-  font-size:18px;
-  margin:5px 0;
-}
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 6px 15px rgba(127,175,168,0.3);
+    }
 
-.price{
-  font-size:24px;
-  font-weight:bold;
-  color:#7FAFA8;
-}
+    .card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
 
-/* BOTONES FLOTANTES */
-.floating-buttons{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
+    .card-content{
+      text-align:center;
+      padding:15px;
+    }
 
-.fab{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  border:none;
-  cursor:pointer;
-}
+    .card-content h3{
+      font-size:22px;
+    }
 
-/* SUBIR */
-.scroll-top{
-  background:#7FAFA8;
-  color:white;
-  opacity:0;
-}
+    .desc{
+      font-size:18px;
+      margin:8px 0;
+    }
 
-.scroll-top.show{
-  opacity:1;
-}
+    .price{
+      font-size:24px;
+      font-weight:700;
+      color:var(--accent);
+    }
 
-/* WHATSAPP */
-.whatsapp{
-  background:#25D366;
-  color:white;
-  text-decoration:none;
-}
-</style>
+    /* BOTONES FLOTANTES */
+    .floating-buttons{
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+
+    .fab{
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      cursor:pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      font-size:22px;
+    }
+
+    .scroll-top{
+      background: linear-gradient(135deg, #7FAFA8, #6fa39c);
+      color:white;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .scroll-top.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .whatsapp{
+      background-color: #25D366;
+      color:white;
+      text-decoration:none;
+    }
+
+  </style>
 </head>
 
 <body>
 
 <header class="header">
-  <img src="images/logo.png" alt="Logo">
+  <img src="images/logo.png" alt="Dulce Beba" class="logo">
 </header>
 
 <div class="container">
 
   <div class="filters">
-    <button onclick="filterMenu('all')" class="active">Todo</button>
-    <button onclick="filterMenu('bebidas_calientes')">Café</button>
-    <button onclick="filterMenu('bebidas_frias')">Frías</button>
-    <button onclick="filterMenu('dulces')">Dulces</button>
-    <button onclick="filterMenu('salados')">Salados</button>
-    <button onclick="filterMenu('tortas')">Tortas</button>
-    <button onclick="filterMenu('postres')">Postres</button>
-    <button onclick="filterMenu('meriendas')">Meriendas</button>
+    <button onclick="filterMenu('all')" class="active">🩵Todo</button>
+    <button onclick="filterMenu('bebidas_calientes')">☕Bebidas calientes</button>
+    <button onclick="filterMenu('bebidas_frias')">🍹Bebidas frías</button>
+    <button onclick="filterMenu('dulces')">🍪Dulce</button>
+    <button onclick="filterMenu('salados')">🥪Salado</button>
+    <button onclick="filterMenu('tortas')">🍰Tortas</button>
+    <button onclick="filterMenu('postres')">🍮Postres</button>
+    <button onclick="filterMenu('meriendas')">🧁Meriendas</button>
+    <button onclick="filterMenu('eventos')">⭐Eventos</button>
   </div>
 
-  <div id="menu"></div>
-
+  <div class="grid" id="menu"></div>
 </div>
 
-<!-- BOTONES -->
 <div class="floating-buttons">
   <button class="fab scroll-top" id="scrollTopBtn">↑</button>
   <a class="fab whatsapp" href="https://wa.me/598095662193">📞</a>
@@ -168,8 +188,8 @@ async function load(){
   const rows=text.split("\r\n");
 
   data = rows.map(r=>{
-    const [id,name,desc,price,img,cat]=r.split(",");
-    return {id,name,desc,price,img,cat};
+    const [id,name,description,price,img,cat]=r.split(",");
+    return {id,name,description,price,img,cat};
   }).filter(i=>i.id);
 
   render();
@@ -183,10 +203,12 @@ function render(filter='all'){
       .forEach(item=>{
         menu.innerHTML+=`
         <div class="card">
-          <h3>${item.name}</h3>
-          <img src="${item.img || 'images/sinimagen.png'}">
-          <p class="desc">${item.desc || ""}</p>
-          <p class="price">$${item.price}</p>
+          <img src="${item.img || 'images/sinimagen.png'}" onerror="this.src='images/sinimagen.png'">
+          <div class="card-content">
+            <h3>${item.name}</h3>
+            <p class="desc">${item.description || ""}</p>
+            <p class="price">$${item.price}</p>
+          </div>
         </div>`;
       });
 }
@@ -197,7 +219,6 @@ function filterMenu(cat){
   render(cat)
 }
 
-/* BOTÓN SUBIR */
 const btn=document.getElementById("scrollTopBtn");
 
 window.addEventListener("scroll",()=>{
